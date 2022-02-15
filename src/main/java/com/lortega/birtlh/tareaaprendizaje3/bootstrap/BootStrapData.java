@@ -1,5 +1,7 @@
 package com.lortega.birtlh.tareaaprendizaje3.bootstrap;
 
+import java.time.LocalDate;
+
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -8,14 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloa.AddressRepositorioA;
-import com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloa.StudentRepositorioA;
-import com.lortega.birtlh.tareaaprendizaje3.repositorios.modelob.StudentRepositorioB;
-import com.lortega.birtlh.txuleta.repositorios.CategoriaRepositorio;
-import com.lortega.birtlh.txuleta.repositorios.TxuletaRepositorio;
 
-import entidades.Address;
-import entidades.Student;
+
 
 @Component 
 public class BootStrapData implements CommandLineRunner {
@@ -23,15 +19,15 @@ public class BootStrapData implements CommandLineRunner {
 	private static Logger log = LoggerFactory
 		      .getLogger(BootStrapData.class);
 	
+		
+	@Autowired
+	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloa.StudentRepositorioA studentRepositorioA;
 	
 	@Autowired
-	private AddressRepositorioA addressRepositorioA;
+	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modelob.StudentRepositorioB studentRepositorioB;
 	
 	@Autowired
-	private StudentRepositorioA studentRepositorioA;
-	
-	@Autowired
-	private StudentRepositorioB studentRepositorioB;
+	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloc.StudentRepositorioC studentRepositorioC;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -122,12 +118,49 @@ public class BootStrapData implements CommandLineRunner {
 	@Transactional
 	private void tareaAprendizaje3CEjercicio1() throws Exception {
 		
+		log.info("------------------------------------------");
+		log.info("tareaAprendizaje3C Ejercicio1");
+		log.info("------------------------------------------");
+
+		// crea un objeto Student
+		log.info("Creando un nuevo objeto Student con su dirección...");
+		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student student = createStudentModeloC();	
+							
+					
+		// guarda el objeto Student
+		log.info("Guardando el estudiante...");
+		studentRepositorioC.save(student);
+								
+		// es necesario refresh para hacer una select y así obtener el valor del campo calculado
+		//studentRepositorioC.rrefresh(student);
+		log.info(String.valueOf(student.getAge()));
+					
+		log.info("Hecho!");
+		
+		log.info("END tareaAprendizaje3C Ejercicio1");
 	}
 	
 
 	@Transactional
 	private void tareaAprendizaje3CEjercicio4() throws Exception {
 		
+		log.info("------------------------------------------");
+		log.info("tareaAprendizaje3C Ejercicio4");
+		log.info("------------------------------------------");
+
+		
+		System.out.println("Borrando un objeto Student y sus teléfonos");
+		
+		int student_id = 9;
+		
+		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student tempStudent = studentRepositorioC.getById(student_id);
+		
+		studentRepositorioC.delete(tempStudent);
+						
+		System.out.println("Hecho!");
+		
+		log.info("END tareaAprendizaje3C Ejercicio4");
+
 	}
 
 	
@@ -161,4 +194,22 @@ public class BootStrapData implements CommandLineRunner {
 		tempStudent.setAddress(tempAddress);
 		return tempStudent;		
 	}
+	
+	private static com.lortega.birtlh.tareaaprendizaje3.modeloc.Student createStudentModeloC() {
+		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modeloc.Student();
+		com.lortega.birtlh.tareaaprendizaje3.modeloc.Address tempAddress = new com.lortega.birtlh.tareaaprendizaje3.modeloc.Address();
+		tempStudent.setFirstName("Mikel");
+		tempStudent.setLastName("Unamuno");
+		tempStudent.setEmail("gunamuno@birt.eus");
+		tempStudent.getPhones().add("612123456");
+		tempStudent.getPhones().add("612123457");
+		tempStudent.setBirthdate(LocalDate.parse("1989-04-04"));
+		tempAddress.setAddressLine1("Kale Nagusia 10");
+		tempAddress.setAddressLine2("3B");
+		tempAddress.setCity("Donostia");
+		tempAddress.setZipCode("20003");
+		tempStudent.setAddress(tempAddress);
+		return tempStudent;		
+	}
+	
 }
