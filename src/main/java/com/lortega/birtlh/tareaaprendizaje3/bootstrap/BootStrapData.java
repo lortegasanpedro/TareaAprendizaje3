@@ -20,11 +20,11 @@ public class BootStrapData implements CommandLineRunner {
 		      .getLogger(BootStrapData.class);
 	
 		
-	@Autowired
-	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloa.StudentRepositorioA studentRepositorioA;
+	//@Autowired
+	//private com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloa.StudentRepositorioA studentRepositorioA;
 	
-	@Autowired
-	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modelob.StudentRepositorioB studentRepositorioB;
+	//@Autowired
+	//private com.lortega.birtlh.tareaaprendizaje3.repositorios.modelob.StudentRepositorioB studentRepositorioB;
 	
 	@Autowired
 	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloc.StudentRepositorioC studentRepositorioC;
@@ -32,9 +32,10 @@ public class BootStrapData implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("START Tarea Aprendizaje3");
+		this.tareaAprendizaje3CEjercicio1();
 		log.info("END Tarea Aprendizaje3");
 	}
-	
+	/*
 	@Transactional
 	private void tareaAprendizaje3AEjercicio1() throws Exception {
 		
@@ -51,7 +52,8 @@ public class BootStrapData implements CommandLineRunner {
 		log.info("END tareaAprendizaje3A Ejercicio1");
 
 	}
-	
+*/	
+	/*
 	@Transactional
 	private void tareaAprendizaje3AEjercicio4() throws Exception {
 		
@@ -114,6 +116,7 @@ public class BootStrapData implements CommandLineRunner {
 		
 	}
 
+	*/
 	
 	@Transactional
 	private void tareaAprendizaje3CEjercicio1() throws Exception {
@@ -140,6 +143,7 @@ public class BootStrapData implements CommandLineRunner {
 		log.info("END tareaAprendizaje3C Ejercicio1");
 	}
 	
+	/*
 
 	@Transactional
 	private void tareaAprendizaje3CEjercicio4() throws Exception {
@@ -162,8 +166,8 @@ public class BootStrapData implements CommandLineRunner {
 		log.info("END tareaAprendizaje3C Ejercicio4");
 
 	}
-
-	
+*/
+	/*
 	private static com.lortega.birtlh.tareaaprendizaje3.modeloa.Student createStudentModeloA() {
 		com.lortega.birtlh.tareaaprendizaje3.modeloa.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modeloa.Student();
 		com.lortega.birtlh.tareaaprendizaje3.modeloa.Address tempAddress = new com.lortega.birtlh.tareaaprendizaje3.modeloa.Address();
@@ -176,8 +180,9 @@ public class BootStrapData implements CommandLineRunner {
 		tempAddress.setZipCode("20003");
 		tempStudent.setAddress(tempAddress);
 		return tempStudent;		
-	}
+	}*/
 	
+	/*
 	
 	private static com.lortega.birtlh.tareaaprendizaje3.modelob.Student createStudentModeloB() {
 		com.lortega.birtlh.tareaaprendizaje3.modelob.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modelob.Student();
@@ -194,7 +199,7 @@ public class BootStrapData implements CommandLineRunner {
 		tempStudent.setAddress(tempAddress);
 		return tempStudent;		
 	}
-	
+	*/
 	private static com.lortega.birtlh.tareaaprendizaje3.modeloc.Student createStudentModeloC() {
 		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modeloc.Student();
 		com.lortega.birtlh.tareaaprendizaje3.modeloc.Address tempAddress = new com.lortega.birtlh.tareaaprendizaje3.modeloc.Address();

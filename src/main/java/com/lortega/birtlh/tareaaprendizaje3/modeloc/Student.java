@@ -36,7 +36,7 @@ public class Student {
 	private String email;
 	
 	@Embedded
-	private Address address;
+	private com.lortega.birtlh.tareaaprendizaje3.modeloc.Address address;
 	
 	@ElementCollection
 	@CollectionTable(name= "student_phone", joinColumns=@JoinColumn(name="student_id"))
@@ -65,11 +65,11 @@ public class Student {
 		this.age = age;
 	}
 
-	public Address getAddress() {
+	public com.lortega.birtlh.tareaaprendizaje3.modeloc.Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(com.lortega.birtlh.tareaaprendizaje3.modeloc.Address address) {
 		this.address = address;
 	}
 
