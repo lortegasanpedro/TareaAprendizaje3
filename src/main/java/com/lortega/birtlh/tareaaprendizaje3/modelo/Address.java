@@ -1,4 +1,4 @@
-package com.lortega.birtlh.tareaaprendizaje3.modeloc;
+package com.lortega.birtlh.tareaaprendizaje3.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

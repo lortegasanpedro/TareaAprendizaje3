@@ -1,4 +1,4 @@
-package com.lortega.birtlh.tareaaprendizaje3.modeloc;
+package com.lortega.birtlh.tareaaprendizaje3.modelo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class Student {
 	private String email;
 	
 	@Embedded
-	private com.lortega.birtlh.tareaaprendizaje3.modeloc.Address address;
+	private com.lortega.birtlh.tareaaprendizaje3.modelo.Address address;
 	
 	@ElementCollection
 	@CollectionTable(name= "student_phone", joinColumns=@JoinColumn(name="student_id"))
@@ -65,11 +65,11 @@ public class Student {
 		this.age = age;
 	}
 
-	public com.lortega.birtlh.tareaaprendizaje3.modeloc.Address getAddress() {
+	public com.lortega.birtlh.tareaaprendizaje3.modelo.Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(com.lortega.birtlh.tareaaprendizaje3.modeloc.Address address) {
+	public void setAddress(com.lortega.birtlh.tareaaprendizaje3.modelo.Address address) {
 		this.address = address;
 	}
 

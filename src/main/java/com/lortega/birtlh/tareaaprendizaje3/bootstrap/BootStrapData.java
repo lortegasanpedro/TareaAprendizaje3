@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.lortega.birtlh.tareaaprendizaje3.modelo.Address;
+import com.lortega.birtlh.tareaaprendizaje3.modelo.Student;
+import com.lortega.birtlh.tareaaprendizaje3.repositorios.StudentRepositorio;
+
 
 
 
@@ -27,15 +31,20 @@ public class BootStrapData implements CommandLineRunner {
 	//private com.lortega.birtlh.tareaaprendizaje3.repositorios.modelob.StudentRepositorioB studentRepositorioB;
 	
 	@Autowired
-	private com.lortega.birtlh.tareaaprendizaje3.repositorios.modeloc.StudentRepositorioC studentRepositorioC;
+	private StudentRepositorio studentRepositorio;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("START Tarea Aprendizaje3");
+		this.tareaAprendizaje3AEjercicio1();
+		this.tareaAprendizaje3AEjercicio4();
+		this.tareaAprendizaje3BEjercicio1();
+		this.tareaAprendizaje3BEjercicio4();
 		this.tareaAprendizaje3CEjercicio1();
+		this.tareaAprendizaje3CEjercicio4();
 		log.info("END Tarea Aprendizaje3");
 	}
-	/*
+	
 	@Transactional
 	private void tareaAprendizaje3AEjercicio1() throws Exception {
 		
@@ -43,17 +52,17 @@ public class BootStrapData implements CommandLineRunner {
 		log.info("tareaAprendizaje3A Ejercicio1");
 		log.info("------------------------------------------");
 		log.info("Creando un nuevo objeto Student con su dirección...");
-		com.lortega.birtlh.tareaaprendizaje3.modeloa.Student student = createStudentModeloA();	
+		Student student = createStudentModeloA();	
 				
-		studentRepositorioA.save(student);
+		studentRepositorio.save(student);
 		
 		log.info("Hecho!");
 
 		log.info("END tareaAprendizaje3A Ejercicio1");
 
 	}
-*/	
-	/*
+	
+	
 	@Transactional
 	private void tareaAprendizaje3AEjercicio4() throws Exception {
 		
@@ -64,12 +73,15 @@ public class BootStrapData implements CommandLineRunner {
 		
 		int student_id = 172;
 		
-		com.lortega.birtlh.tareaaprendizaje3.modeloa.Student tempStudent = studentRepositorioA.getById(student_id);
-	
-		studentRepositorioA.delete(tempStudent);
+		if (studentRepositorio.existsById(student_id)) {
+			Student tempStudent = studentRepositorio.getById(student_id);
+			studentRepositorio.delete(tempStudent);
+			log.info("Hecho!");
+		} else {
+			log.info("NO encontrado!");
+		}
 		
-		log.info("Hecho!");
-
+		
 		log.info("END tareaAprendizaje3A Ejercicio4");
 
 	}
@@ -82,11 +94,11 @@ public class BootStrapData implements CommandLineRunner {
 		log.info("------------------------------------------");
 		
 		log.info("Creando un nuevo objeto Student con su dirección...");
-		com.lortega.birtlh.tareaaprendizaje3.modelob.Student student = createStudentModeloB();
+		Student student = createStudentModeloB();
 		
 		// guarda el objeto Student
 		log.info("Guardando el estudiante...");
-		studentRepositorioB.save(student);
+		studentRepositorio.save(student);
 				
 		System.out.println("Hecho!");
 		
@@ -105,18 +117,20 @@ public class BootStrapData implements CommandLineRunner {
 		log.info("Borrando un objeto Student y sus teléfonos");
 					
 		int student_id = 176;
-					
-		com.lortega.birtlh.tareaaprendizaje3.modelob.Student tempStudent = studentRepositorioB.getById(student_id);
-							
-		studentRepositorioB.delete(tempStudent);
-							
-		log.info("Hecho!");
+		
+		if (studentRepositorio.existsById(student_id)) {
+			Student tempStudent = studentRepositorio.getById(student_id);
+			studentRepositorio.delete(tempStudent);					
+			log.info("Hecho!");
+		} else {
+			log.info("NO encontrado!");
+		}
 		
 		log.info("END tareaAprendizaje3B Ejercicio4");
 		
 	}
 
-	*/
+	
 	
 	@Transactional
 	private void tareaAprendizaje3CEjercicio1() throws Exception {
@@ -127,12 +141,12 @@ public class BootStrapData implements CommandLineRunner {
 
 		// crea un objeto Student
 		log.info("Creando un nuevo objeto Student con su dirección...");
-		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student student = createStudentModeloC();	
+		com.lortega.birtlh.tareaaprendizaje3.modelo.Student student = createStudentModeloC();	
 							
 					
 		// guarda el objeto Student
 		log.info("Guardando el estudiante...");
-		studentRepositorioC.save(student);
+		studentRepositorio.save(student);
 								
 		// es necesario refresh para hacer una select y así obtener el valor del campo calculado
 		//studentRepositorioC.rrefresh(student);
@@ -142,8 +156,6 @@ public class BootStrapData implements CommandLineRunner {
 		
 		log.info("END tareaAprendizaje3C Ejercicio1");
 	}
-	
-	/*
 
 	@Transactional
 	private void tareaAprendizaje3CEjercicio4() throws Exception {
@@ -157,20 +169,21 @@ public class BootStrapData implements CommandLineRunner {
 		
 		int student_id = 9;
 		
-		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student tempStudent = studentRepositorioC.getById(student_id);
-		
-		studentRepositorioC.delete(tempStudent);
-						
-		System.out.println("Hecho!");
+		if (studentRepositorio.existsById(student_id)) {
+			Student tempStudent = studentRepositorio.getById(student_id);
+			studentRepositorio.delete(tempStudent);					
+			log.info("Hecho!");
+		} else {
+			log.info("NO encontrado!");
+		}
 		
 		log.info("END tareaAprendizaje3C Ejercicio4");
 
 	}
-*/
-	/*
-	private static com.lortega.birtlh.tareaaprendizaje3.modeloa.Student createStudentModeloA() {
-		com.lortega.birtlh.tareaaprendizaje3.modeloa.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modeloa.Student();
-		com.lortega.birtlh.tareaaprendizaje3.modeloa.Address tempAddress = new com.lortega.birtlh.tareaaprendizaje3.modeloa.Address();
+	
+	private static Student createStudentModeloA() {
+		Student tempStudent = new Student();
+		Address tempAddress = new Address();
 		tempStudent.setFirstName("Gorka");
 		tempStudent.setLastName("Unamuno");
 		tempStudent.setEmail("gunamuno@birt.eus");
@@ -180,13 +193,11 @@ public class BootStrapData implements CommandLineRunner {
 		tempAddress.setZipCode("20003");
 		tempStudent.setAddress(tempAddress);
 		return tempStudent;		
-	}*/
+	}
 	
-	/*
-	
-	private static com.lortega.birtlh.tareaaprendizaje3.modelob.Student createStudentModeloB() {
-		com.lortega.birtlh.tareaaprendizaje3.modelob.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modelob.Student();
-		com.lortega.birtlh.tareaaprendizaje3.modelob.Address tempAddress = new com.lortega.birtlh.tareaaprendizaje3.modelob.Address();
+	private static Student createStudentModeloB() {
+		Student tempStudent = new Student();
+		Address tempAddress = new Address();
 		tempStudent.setFirstName("Mikel");
 		tempStudent.setLastName("Unamuno");
 		tempStudent.setEmail("junamuno@birt.eus");
@@ -199,10 +210,10 @@ public class BootStrapData implements CommandLineRunner {
 		tempStudent.setAddress(tempAddress);
 		return tempStudent;		
 	}
-	*/
-	private static com.lortega.birtlh.tareaaprendizaje3.modeloc.Student createStudentModeloC() {
-		com.lortega.birtlh.tareaaprendizaje3.modeloc.Student tempStudent = new com.lortega.birtlh.tareaaprendizaje3.modeloc.Student();
-		com.lortega.birtlh.tareaaprendizaje3.modeloc.Address tempAddress = new com.lortega.birtlh.tareaaprendizaje3.modeloc.Address();
+	
+	private static Student createStudentModeloC() {
+		Student tempStudent = new Student();
+		Address tempAddress = new Address();
 		tempStudent.setFirstName("Mikel");
 		tempStudent.setLastName("Unamuno");
 		tempStudent.setEmail("gunamuno@birt.eus");
